@@ -1,7 +1,16 @@
+sudo apt update
+sudo apt install python3.5
+sudo apt install python3.5-dev
+sudo unlink /usr/bin/python3
+sudo ln -s /usr/bin/python3.5 /usr/bin/python3
+sudo python3 -m pip install gunicorn
+sudo python3 -m pip install django==2.0
+sudo python3 -m pip install mysqlclient
 sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/nginx.conf
 sudo /etc/init.d/nginx restart
 cd /home/box/web/
 gunicorn -b 0.0.0.0:8080 hello:app &
+sudo /etc/init.d/mysql start
 cd ask/
 sudo mysql -uroot -e "create database stepic_web;" # создание базы данных stepic_web
 sudo mysql -uroot -e "CREATE USER 'egreth'@'localhost' IDENTIFIED BY 'password';" # создание пользователя egreth с паролем password
