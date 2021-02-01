@@ -1,0 +1,25 @@
+<html>
+<head></head>
+<body>
+{% if questions %}
+    <ul>
+    {% for question in questions %}
+        <li><a href="/question/{{ question.id }}/">{{ question.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No questions are available.</p>
+{% endif %}
+<nav><ul class="pagination">
+{% for p in paginator.page_range %}
+    {% if p == page.number %}
+        <li class="active">
+        {% else %}
+        <li>
+        {% endif %}
+    <a href="{{ paginator.baseurl }}{{ p }}">{{ p }}</a>
+</li>
+{% endfor %}
+</ul></nav>
+</body>
+</html>

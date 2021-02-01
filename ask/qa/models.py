@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class QuestionManager(models.Manager):
     def new(self):
-        return self.order_by('-added_at')
+        return self.order_by('-id')
 
     def popular(self):
         return self.order_by('-rating')
@@ -12,6 +12,8 @@ class QuestionManager(models.Manager):
 
 class Question(models.Model):
     objects = QuestionManager()
+    is_published = models.BooleanField()
+    is_deleted = models.BooleanField()
     title = models.CharField(max_length=255)
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
@@ -22,7 +24,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     text = models.TextField()
-    added_at = models.DateTimeField(auto_now_add=True)
+    added_at = models.DateTimeField(blank=True, auto_now_add=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 

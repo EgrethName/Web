@@ -15,17 +15,16 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include
-from django.conf.urls import url
+from django.urls import include, re_path
 
 urlpatterns = [
-    url('qa/', include('qa.urls')),
-    url('admin/', admin.site.urls),
-    url(r'^$', include('qa.urls')),
-    url('login/', include('qa.urls')),
-    url('signup/', include('qa.urls')),
-    url('ask/', include('qa.urls')),
-    url(r'question/\d+/', include('qa.urls')),
-    url('popular/', include('qa.urls')),
-    url('new/', include('qa.urls')),
+    re_path('qa/', include('qa.urls')),
+    re_path('admin/', admin.site.urls),
+    re_path(r'^$', include('qa.urls')),
+    re_path('login/', include('qa.urls')),
+    re_path('signup/', include('qa.urls')),
+    re_path('ask/', include('qa.urls')),
+    re_path(r'question/\d+/', include('qa.urls')),
+    re_path('popular/', include('qa.urls')),
+    re_path('new/', include('qa.urls')),
 ]
