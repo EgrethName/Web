@@ -11,13 +11,9 @@ def test(request, *args, **kwargs):
 
 def main(request):
     ordered_questions = Question.objects.new()
-    print('ordered_questions: {}'.format(ordered_questions))
-    filtered_questions = ordered_questions.filter(is_published=True)
-    print('filtered_questions: {}'.format(filtered_questions))
-
     page = request.GET.get('page', 1)
     limit = request.GET.get('limit', 10)
-    paginator = Paginator(filtered_questions, limit)
+    paginator = Paginator(ordered_questions , limit)
     paginator.baseurl = '/?page='
     page = paginator.page(page)
     return render(request, 'questions_by_date.html', {
@@ -29,10 +25,9 @@ def main(request):
 
 def popular(request):
     ordered_questions = Question.objects.popular()
-    filtered_questions = ordered_questions.filter(is_published=True)
     page = request.GET.get('page', 1)
     limit = request.GET.get('limit', 10)
-    paginator = Paginator(filtered_questions, limit)
+    paginator = Paginator(ordered_questions , limit)
     paginator.baseurl = '/popular/?page='
     page = paginator.page(page)
     return render(request, 'popular/questions_by_rating.html', {
