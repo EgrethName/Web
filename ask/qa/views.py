@@ -2,6 +2,7 @@ from django.http import HttpResponse, Http404
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_GET
 from .models import Question
+from .models import QuestionManager
 from .models import Answer
 from django.shortcuts import render, get_object_or_404
 
@@ -11,7 +12,8 @@ def test(request, *args, **kwargs):
 
 
 def main(request):
-    questions = Question.objects.filter(is_published=True).new()
+    questions = Question.objects.filter(is_published=True)
+    questions = QuestionManager.new(questions)
     page = request.GET.get('page', 1)
     limit = request.GET.get('limit', 10)
     paginator = Paginator(questions, limit)
