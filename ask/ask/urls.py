@@ -20,7 +20,7 @@ from django.urls import include, re_path
 urlpatterns = [
     re_path('qa/', include('qa.urls')),
     re_path('admin/', admin.site.urls),
-    re_path(r'^$', include('qa.urls')),
+    re_path('', include('qa.urls')),
     re_path('login/', include('qa.urls')),
     re_path('signup/', include('qa.urls')),
     re_path('ask/', include('qa.urls')),

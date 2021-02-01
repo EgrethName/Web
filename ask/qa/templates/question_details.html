@@ -1,0 +1,16 @@
+<html>
+<head></head>
+<body>
+<h1>{{ question.title }}</h1>
+<p>{{ question.text }}</p>
+{% if answers %}
+    <ul>
+    {% for answer in answers %}
+        <li>{{ answer.text }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No answers.</p>
+{% endif %}
+</body>
+</html>

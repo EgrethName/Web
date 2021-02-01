@@ -1,9 +1,7 @@
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_GET
 from .models import Question
-from .models import QuestionManager
-from .models import Answer
 from django.shortcuts import render, get_object_or_404
 
 
@@ -12,11 +10,14 @@ def test(request, *args, **kwargs):
 
 
 def main(request):
-    questions = Question.objects.filter(is_published=True)
-    questions = QuestionManager.new(questions)
+    ordered_questions = Question.objects.new()
+    print('ordered_questions: {}'.format(ordered_questions))
+    filtered_questions = ordered_questions.filter(is_published=True)
+    print('filtered_questions: {}'.format(filtered_questions))
+
     page = request.GET.get('page', 1)
     limit = request.GET.get('limit', 10)
-    paginator = Paginator(questions, limit)
+    paginator = Paginator(filtered_questions, limit)
     paginator.baseurl = '/?page='
     page = paginator.page(page)
     return render(request, 'questions_by_date.html', {
@@ -27,10 +28,11 @@ def main(request):
 
 
 def popular(request):
-    questions = Question.objects.filter(is_published=True).popular()
+    ordered_questions = Question.objects.popular()
+    filtered_questions = ordered_questions.filter(is_published=True)
     page = request.GET.get('page', 1)
     limit = request.GET.get('limit', 10)
-    paginator = Paginator(questions, limit)
+    paginator = Paginator(filtered_questions, limit)
     paginator.baseurl = '/popular/?page='
     page = paginator.page(page)
     return render(request, 'popular/questions_by_rating.html', {
