@@ -11,6 +11,12 @@
 {% else %}
     <p>No new questions are available.</p>
 {% endif %}
+<form class = "form-horizontal" method = "post" action="/ask/">
+    {% csrf_token %}
+<div class = "form-actions">
+    <button type = "submit" class = "btn btn-primary">Создать вопрос</button>
+</div>
+</form>
 <nav><ul class="pagination">
 {% for p in paginator.page_range %}
     {% if p == page.number %}

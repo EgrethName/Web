@@ -12,5 +12,12 @@
 {% else %}
     <p>No answers.</p>
 {% endif %}
+<form class = "form-horizontal" method = "post" action = "" >
+    {% csrf_token %}
+    {{ form.as_table }}
+    <div class = "form-actions">
+    <button type = "submit" class = "btn btn-primary">Добавить ответ</button>
+    </div>
+</form>
 </body>
 </html>
