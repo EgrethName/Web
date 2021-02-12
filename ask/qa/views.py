@@ -73,6 +73,15 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            sessionid = do_login(username, password)
+            if sessionid:
+                response = HttpResponseRedirect('/')
+                response.set_cookie('sessionid', sessionid, httponly=True,
+                                    expires=datetime.datetime.today() + datetime.timedelta(days=30)
+                                    )
+                return response
         return redirect('/')
     else:
         form = SignupForm()
