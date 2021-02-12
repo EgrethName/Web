@@ -1,0 +1,12 @@
+<html>
+<head></head>
+<body>
+<h2>Вход</h2>
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}
+    {{ error }}
+<button type="submit">Отправить</button>
+</form>
+</body>
+</html>

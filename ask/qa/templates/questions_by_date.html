@@ -1,6 +1,17 @@
 <html>
-<head></head>
+<head>Visible-invisible</head>
 <body>
+<p>Текущий пользователь: {{ user }}</p>
+<form class = "form-horizontal" action="/signup/">
+<div class = "form-actions">
+    <button type = "submit" class = "btn btn-primary">Зарегистрироваться</button>
+</div>
+</form>
+<form class = "form-horizontal" action="/login/">
+<div class = "form-actions">
+    <button type = "submit" class = "btn btn-primary">Войти</button>
+</div>
+</form>
 {% if questions %}
     <ul>
     {% for question in questions %}
@@ -11,8 +22,7 @@
 {% else %}
     <p>No new questions are available.</p>
 {% endif %}
-<form class = "form-horizontal" method = "post" action="/ask/">
-    {% csrf_token %}
+<form class = "form-horizontal" action="/ask/">
 <div class = "form-actions">
     <button type = "submit" class = "btn btn-primary">Создать вопрос</button>
 </div>
@@ -24,7 +34,7 @@
         {% else %}
         <li>
         {% endif %}
-    <a href="{{ paginator.baseurl }}{{ p }}">{{ p }}</a>
+    <a href="{{ paginator.baseurl }}{{ p }}{{ paginator.limit }}{{ paginator.per_page }}">{{ p }}</a>
 </li>
 {% endfor %}
 </ul></nav>

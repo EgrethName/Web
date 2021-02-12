@@ -2,11 +2,12 @@
 <head></head>
 <body>
 <h1>{{ question.title }}</h1>
+<p>Автор вопроса: {{ author }}</p>
 <p>{{ question.text }}</p>
 {% if answers %}
     <ul>
     {% for answer in answers %}
-        <li>{{ answer.text }}</li>
+        <li>{{ answer.text }} author is: {{ answer.author.username }}</li>
     {% endfor %}
     </ul>
 {% else %}
